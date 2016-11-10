@@ -33,6 +33,7 @@ Hints at the bottom of this file.
           } else {
             $scope.heroHealth += 3;
           }
+          checkWin();
         }
 
         $scope.flee = function() {
@@ -42,8 +43,18 @@ Hints at the bottom of this file.
           } else {
             $scope.heroHealth -= 100;
           }
+          checkWin();
         }
-      })
+
+        checkWin = function() {
+          if ($scope.heroHealth <= 0) {
+            $scope.message = 'You Lose!';
+          }
+          if ($scope.dragonHealth <= 0) {
+            $scope.message = 'You Win!';
+          }
+        }
+      });
     </script>
 
 
@@ -51,8 +62,11 @@ Hints at the bottom of this file.
   <body>
     <div ng-app="GameOfThronesLight"
       ng-controller="GoTController">
-      <button ng-click="fight()">Roundhouse</button><br>
+      Hero: {{heroHealth}}<br>
+      Dragon: {{dragonHealth}}
+      <button ng-click="fight()">Roundhouse</button>
       <button ng-click="flee()">Bend Over</button>
+      {{message}}
 
 
     </div>
